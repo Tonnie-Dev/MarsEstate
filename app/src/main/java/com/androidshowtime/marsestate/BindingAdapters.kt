@@ -37,17 +37,17 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
     * it just looks like it is part of the String Class*/
     imgUrl?.let {
         val imgUri = imgUrl.toUri()
-                .buildUpon()
-                .scheme("https")
-                .build()
+            .buildUpon()
+            .scheme("https")
+            .build()
 
 
 
         Glide.with(imgView.context)
-                .load(imgUri)
-                .placeholder(R.drawable.loading_animation)
-                .error(R.drawable.ic_broken_image)
-                .into(imgView)
+            .load(imgUri)
+            .placeholder(R.drawable.loading_animation)
+            .error(R.drawable.ic_broken_image)
+            .into(imgView)
 
 
     }
@@ -99,15 +99,23 @@ fun bindStatus(statusImageView: ImageView, status: MarsAPIStatus?) {
     }
 
 
-    fun myGlideDemoMethod(imageView: ImageView) {
-
-        Glide.with(imageView.context)
-                .load("http://via.placeholder.com/300.png")
-                .placeholder(R.drawable.loading_animation)  //placeholder when images are loading
-                .error(R.drawable.ic_broken_image) //image to be displayed if image is not displayed
-                .into(imageView)
-
-    }
-
-
 }
+//
+//@BindingAdapter("textTypeX")
+//fun displayTextType(textView:TextView,marsProperty: MarsProperty){
+//val app = requireNotNull(activity).application
+//
+//    val detailFrag = DetailViewModel(marsProperty, app)
+//
+//        app.applicationContext.getString(
+//            R.string.display_type,
+//            textView.context.getString(
+//                when (marsProperty.isRentable) {
+//                    true -> R.string.type_rent
+//                    false -> R.string.type_sale
+//                }
+//            )
+//        )
+//
+//
+//}

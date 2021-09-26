@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 android {
-    compileSdkVersion"android-R"
+    compileSdkVersion 30
 
     dataBinding {
         enabled = true
@@ -12,8 +12,8 @@ android {
     viewBinding.enabled = true
     defaultConfig {
         applicationId "com.androidshowtime.marsestate"
-        minSdkVersion 29
-        targetSdkVersion 29
+        minSdkVersion 19
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -45,7 +45,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version_kotlin"
-   // implementation 'androidx.appcompat:appcompat:1.1.0'
+    // implementation 'androidx.appcompat:appcompat:1.1.0'
 
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     /*testImplementation 'junit:junit:4.13'
@@ -55,7 +55,8 @@ dependencies {
     // Core with Ktx
     implementation "androidx.core:core-ktx:$version_core"
 
-    // ViewModel and LiveData
+    /*ViewModel and LiveData The APIs in lifecycle-extensions have been deprecated. Instead,
+     add dependencies for the specific Lifecycle artifacts you need.*/
     implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
 
 
@@ -66,34 +67,28 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$version_navigation"
 
     //Retrofit Library Injection - Retrofit library itself & the Converter library
-    implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     //implementation "com.squareup.retrofit2:converter-scalars:$version_retrofit" - change this converter to Moshi
-    implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
+    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
     // Retrofit coroutine Lib
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$version_retrofit_coroutines_adapter"
 
 
-    //Moshi Library Dependencies - Core Moshi JSON Library and Moshi's Kotlin support
-    implementation "com.squareup.moshi:moshi:$version_moshi"
-    implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
+    //Moshi Library Dependencies - Core Moshi JSON Library and Moshi's Kotlin support and converter factory
+    implementation "com.squareup.moshi:moshi:1.9.2"
+    implementation "com.squareup.moshi:moshi-kotlin:1.9.2"
 
     //adding core Kotlin Coroutine Lib
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3"
 
 
-
-
-
     //Glide dependency injection
     implementation "com.github.bumptech.glide:glide:4.11.0"
 
 
-
-
-
-     //Glide Transformations Dependency injections
-     implementation "jp.wasabeef:glide-transformations:4.0.1"
+    //Glide Transformations Dependency injections
+    implementation "jp.wasabeef:glide-transformations:4.0.1"
 
 //tests
 
@@ -101,4 +96,12 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
 }

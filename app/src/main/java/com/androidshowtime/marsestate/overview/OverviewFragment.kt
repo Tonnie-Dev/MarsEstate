@@ -28,8 +28,10 @@ class OverviewFragment : Fragment() {
      * Inflates the layout with Data Binding, sets its lifecycle owner to the OverviewFragment
      * to enable Data Binding to observe LiveData, and sets up the RecyclerView with an adapter.
      */
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         val binding = FragmentOverviewBinding.inflate(inflater)
 
@@ -52,7 +54,7 @@ class OverviewFragment : Fragment() {
 
             if (it != null) {
                 this.findNavController()
-                        .navigate(OverviewFragmentDirections.actionShowDetail(it))
+                    .navigate(OverviewFragmentDirections.actionShowDetail(it))
                 viewModel.displayPropertyDetailsComplete()
             }
         })

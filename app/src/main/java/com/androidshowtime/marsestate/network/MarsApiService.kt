@@ -25,28 +25,34 @@ JSON-String-to-Kotlin-Object converter*/
 add the KotlinJsonAdapterFactory*/
 
 private val moshi = Moshi.Builder()
-        .add(KotlinJsonAdapterFactory())
-        .build()
+    .add(KotlinJsonAdapterFactory())
+    .build()
 //now that we have Moshi in place, we are no longer using the
 //JSON String but Moshi will Parse the String to Kotlin Object
 
 
 //using Retrofit Builder to create Retrofit Object
 private val retrofit = Retrofit.Builder()
-        .addConverterFactory(MoshiConverterFactory.create(moshi)) //handles JSON
-        .addCallAdapterFactory(CoroutineCallAdapterFactory()) //replace the default all Object with Deferred Object
-        .baseUrl(BASE_URL)
-        .build()
+    .addConverterFactory(MoshiConverterFactory.create(moshi)) //handles JSON
+    .addCallAdapterFactory(CoroutineCallAdapterFactory()) //replace the default all Object with Deferred Object
+    .baseUrl(BASE_URL)
+    .build()
 
 
 //interface that defines how Retrofit talks to web server
+
+/*
+define a public object called MarsAPI to initialize the Retrofit service
+object ensures only one instance of MarsAPI will be created
+*/
 interface MarsAPIService {
     @GET("realestate")
     fun getPropertiesAsync(@Query("filter") type: String): Deferred<List<MarsProperty>>
 
-    //getProperties() returns a Deferred Interface which define a
-    //coroutine Job which has await() method
+    /*getProperties() returns a Deferred Interface which define a
+    coroutine Job which has await() method*/
 }
+
 
 /*
 define a public object called MarsAPI to initialize the Retrofit service
@@ -54,7 +60,16 @@ object ensures only one instance of MarsAPI will be created
 */
 
 object MarsAPI {
-    val retrofitService: MarsAPIService by lazy {
-        retrofit.create(MarsAPIService::class.java)
-    }
+    // Configure retrofit to parse JSON and use coroutines
+    private val retrofit2 = Retrofit.Builder()
+        .addConverterFactory(MoshiConverterFactory.create()) //handle JSON String Obj to Kotlin's
+        .addCallAdapterFactory(CoroutineCallAdapterFactory()) //replace the default all Object with Deferred Object
+        .baseUrl(BASE_URL)
+        .build()
+
+    val retrofitService = retrofit.create(MarsAPIService::class.java)
+
 }
+
+
+

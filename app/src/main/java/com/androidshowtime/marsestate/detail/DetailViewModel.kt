@@ -10,7 +10,7 @@ import com.androidshowtime.marsestate.network.MarsProperty
  * The [ViewModel] that is associated with the [DetailFragment].
  */
 class DetailViewModel(marsProperty: MarsProperty, app: Application) :
-        AndroidViewModel(app) {
+    AndroidViewModel(app) {
 
 
     private val _selectedProperty = MutableLiveData<MarsProperty>()
@@ -21,7 +21,7 @@ class DetailViewModel(marsProperty: MarsProperty, app: Application) :
         _selectedProperty.value = marsProperty
     }
 
-    //displays - $450,000 - <string name="display_price_monthly_rental">$%,.0f/month</string>
+    //displays - KES 450,000 - <string name="display_price_monthly_rental">$%,.0f/month</string>
     val displayPropertyPrice = Transformations.map(selectedProperty) {
 
 
@@ -29,11 +29,12 @@ class DetailViewModel(marsProperty: MarsProperty, app: Application) :
         //you need the applicationContext and to import the R class
         //import com.androidshowtime.packagename.R
         app.applicationContext.getString(
-                when (it.isRentable) {
+            when (it.isRentable) {
 
-                    true -> R.string.display_price_monthly_rental
-                    false -> R.string.display_price
-                }, it.price)
+                true -> R.string.display_price_monthly_rental
+                false -> R.string.display_price
+            }, it.price
+        )
 
     }
 
@@ -41,13 +42,25 @@ class DetailViewModel(marsProperty: MarsProperty, app: Application) :
     val displayPropertyType = Transformations.map(selectedProperty) {
 
         app.applicationContext.getString(
-                R.string.display_type,
-                app.applicationContext.getString(
-                        when (it.isRentable) {
-                            true -> R.string.type_rent
-                            false -> R.string.type_sale
-                        }
-                )
+            R.string.display_type,
+            app.applicationContext.getString(
+                when (it.isRentable) {
+                    true -> R.string.type_rent
+                    false -> R.string.type_sale
+                }
+            )
         )
+    }
+
+    class DetailViewModelFactory(val marsProperty: MarsProperty, val app: Application) :
+        ViewModelProvider
+        .Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return DetailViewModel(marsProperty, app) as T
+            }
+            throw IllegalArgumentException("Unable to construct viewmodel")
+        }
     }
 }

@@ -25,7 +25,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:listDataX="@{viewModel.properties}"
+           listDataX="@{viewModel.properties}"
             app:spanCount="2"
             tools:itemCount="16"
             tools:listitem="@layout/grid_view_item" />
@@ -39,7 +39,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:marsAPIStatusX="@{viewModel.status}" />
+            app:marsAPIStatusX="@{viewModel.status}"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

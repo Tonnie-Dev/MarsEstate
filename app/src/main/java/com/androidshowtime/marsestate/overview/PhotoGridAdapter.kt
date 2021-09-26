@@ -12,11 +12,11 @@ import com.androidshowtime.marsestate.network.MarsProperty
 // Adapter class takes OnClickListener in the constructor
 
 class PhotoGridAdapter(private val onClickListener: OnClickListener) :
-        ListAdapter<MarsProperty, PhotoGridAdapter.ViewHolderClass>(DiffCallBack) {
+    ListAdapter<MarsProperty, PhotoGridAdapter.ViewHolderClass>(DiffCallBack) {
 
     override fun onCreateViewHolder(
-            parent: ViewGroup,
-            viewType: Int
+        parent: ViewGroup,
+        viewType: Int
     ): ViewHolderClass {
         return ViewHolderClass(GridViewItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
@@ -36,7 +36,7 @@ class PhotoGridAdapter(private val onClickListener: OnClickListener) :
 
 
     class ViewHolderClass(val binding: GridViewItemBinding) :
-            RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(marsProperty: MarsProperty) {
             binding.marsProperty = marsProperty
