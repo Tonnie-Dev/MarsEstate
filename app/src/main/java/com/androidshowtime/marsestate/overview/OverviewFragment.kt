@@ -58,7 +58,7 @@ class OverviewFragment : Fragment() {
                 viewModel.displayPropertyDetailsComplete()
             }
         })
-        setHasOptionsMenu(true)
+
         return binding.root
     }
 
@@ -70,6 +70,8 @@ class OverviewFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
 
@@ -79,5 +81,10 @@ class OverviewFragment : Fragment() {
         }
 
         return true
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 }
