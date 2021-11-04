@@ -61,14 +61,14 @@ object ensures only one instance of MarsAPI will be created
 
 object MarsAPI {
     // Configure retrofit to parse JSON and use coroutines
-    val retrofitService = Retrofit.Builder()
+   /* val retrofit = Retrofit.Builder()
         .addConverterFactory(MoshiConverterFactory.create()) //handle JSON String Obj to Kotlin's
         .addCallAdapterFactory(CoroutineCallAdapterFactory()) //replace the default all Object with Deferred Object
         .baseUrl(BASE_URL)
-        .build()
-        .create(MarsAPIService::class.java)
+        .build()*/
 
-    //val retrofitService: MarsAPIService = retrofit.create(MarsAPIService::class.java)
+
+    val retrofitService: MarsAPIService = retrofit.create(MarsAPIService::class.java)
 
 }
 
